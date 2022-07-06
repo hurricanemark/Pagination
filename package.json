@@ -1,0 +1,20 @@
+{
+  "name": "Pagination",
+  "version": "1.0.0",
+  "description": "Pagination API",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon --trace-warnings server.js"
+  },
+  "keywords": [],
+  "author": "Mark Nguyen",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

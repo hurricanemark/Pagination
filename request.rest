@@ -1,0 +1,60 @@
+### REQUESTS OF PAGINATION APPLICATION ###
+
+### PHASE 1 ###
+### Assuming that the data source is in sesion memmory and 
+### initialized at runtime as users = [{...}], and employees = [{...}]
+
+@baseUrl = http://localhost:1975
+
+
+
+### Test landing page ###
+# @name = LandingPage
+GET {{baseUrl}} 
+Content-Type: application/x-www-form-urlencoded
+
+###====== TEST Pagination for users data ======###
+### return the users array.  We don't know how many users there are, so we just return the first 100 users ###
+# @name = UpTo100Records
+GET {{baseUrl}}/users?page=1&limit=100 HTTP/1.1
+
+
+### return the first user.  set page=1 and limit=1.  Notice that the previous page = null
+# @name = FirstUser
+GET {{baseUrl}}/users?page=1&limit=1&order=asc HTTP/1.1
+
+### return the second user.  Set page=2 and limit=1
+# @name = SecondUser
+GET {{baseUrl}}/users?page=2&limit=1 HTTP/1.1
+
+
+### return the last user.  Set page=8 and limit=1.  Notice that next page = null
+# @name = LastUser
+GET {{baseUrl}}/users?page=8&limit=1&order=desc HTTP/1.1
+
+
+###===== TEST PAGINATION FOR employees data =====###
+
+### get all 100 employees ###
+# @name = UpTo100Records
+GET {{baseUrl}}/employees?page=1&limit=100 HTTP/1.1
+
+### get the first employee.  Set page=1 and limit=1 order=ascending
+# @name = FirstEmployee
+GET {{baseUrl}}/employees?page=1&limit=1&order=asc HTTP/1.1
+
+### get employee number 7.  Set page=1 and limit=1
+# @name = Employee7
+GET {{baseUrl}}/employees?page=7&limit=1 HTTP/1.1
+
+
+### get first 4 employees, starting from the second employee ###
+# @name = UpTo100Records
+GET {{baseUrl}}/employees?page=2&limit=4 HTTP/1.1
+
+
+### get the last employee.  Set page=1 and limit=1 order=ascending
+# @name = LastEmployee
+GET {{baseUrl}}/employees?page=10&limit=1&order=asc HTTP/1.1
+
+
