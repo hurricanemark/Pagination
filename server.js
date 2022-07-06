@@ -25,6 +25,14 @@ localMongooseDB.once('open', async () => {
 
     // populate dabase table with Employees data
     Promise.all([
+        Users.create({ name: 'John', email: 'john@abc.com' }),
+        Users.create({ name: 'Jane', email: 'jane@abc.com' }),
+        Users.create({ name: 'Bob', email: 'bob@abc.com' }),
+        Users.create({ name: 'Mary', email: 'mary@abc.com' }),
+        Users.create({ name: 'Tom', email: 'tom@abc.com' }),
+        Users.create({ name: 'Jack', email: 'jack@abc.com' }),
+        Users.create({ name: 'Jill', email: 'jill@abc.com' }),
+        Users.create({ name: 'Bill', email: 'bill@email.com' }),
         Employees.create({ name: 'Mark', age: 30, role: 'Developer', hobbies: ['Coding', 'Gaming']}),
         Employees.create({ name: 'Emily', age: 25, role: 'Designer', hobbies: ['Drawing', 'Singing']}),
         Employees.create({ name: 'Roland', age: 35, role: 'Developer', hobbies: ['Hunting', 'Fishing']}),
@@ -36,25 +44,7 @@ localMongooseDB.once('open', async () => {
         Employees.create({ name: 'Samuel', age: 65, role: 'Marketing', hobbies: ['Volunteering', 'Callecting Rocks']}),
         Employees.create({ name: 'Candy', age: 70, role: 'Operation Manager', hobbies: ['Yelling', 'Smilling while yelling']})
     ]).then(() => {
-        console.log('Just did it.  Database is populated with Employees collection.');
-    }).catch(MongooseError => {
-        console.log("MongooseError: ", MongooseError);
-    }).catch(err => {
-        console.log("localMongooseDB error: ", err);
-    });
-
-    // populate dabase table with Users data
-    Promise.all([
-        Users.create({ name: 'John', email: 'john@abc.com' }),
-        Users.create({ name: 'Jane', email: 'jane@abc.com' }),
-        Users.create({ name: 'Bob', email: 'bob@abc.com' }),
-        Users.create({ name: 'Mary', email: 'mary@abc.com' }),
-        Users.create({ name: 'Tom', email: 'tom@abc.com' }),
-        Users.create({ name: 'Jack', email: 'jack@abc.com' }),
-        Users.create({ name: 'Jill', email: 'jill@abc.com' }),
-        Users.create({ name: 'Bill', email: 'bill@email.com' })
-    ]).then(() => {
-        console.log('Just did it.  Database is populated with Users collection.');
+        console.log('Just did it.  Database is populated with Users collection and Employees collection.');
     }).catch(MongooseError => {
         console.log("MongooseError: ", MongooseError);
     }).catch(err => {
