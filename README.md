@@ -69,7 +69,21 @@ app.listen(PORT, () => {console.log("Listening on port %d...", PORT)});
 
 <strong>Let's build the middleware!</strong>
 
-1. Create data schemas (mongoose.Schema) in file *./data.js* and export the models.  We want two collections: pagination.Users and pagination.Employees.  Your code should look close to the following:
+1. <strong>A small crossroad:</strong>  Choosing between local MongoDB or cloud hosted MongoAtlas
+
+-  Option 1: By setting up a local mongodb server, you can be free of space/transaction limitation
+
+-  Option 2: By using the hosted MongoAtlas, you are constrained by the limit of one cluster by which storage and transactions are monitored.  Additional charges incurred once you surpassed the upper limits.
+    * Create an account with MongoAtlas
+    * Copy the URI token into *.env* file
+
+Alas, we choose option 1 by setting up a local db using the [MongoDB Community Server](https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-5.0.9-signed.msi) for windows.
+
+Either option above should provide you with the local agent *MongoDB Compass* which displays connection and collections (ie. tables).
+
+<br>  
+
+2. Create data schemas (mongoose.Schema) in file *./data.js* and export the models.  We want two collections: pagination.Users and pagination.Employees.  Your code should look close to the following:
 
 ```
 const mongoose = require('mongoose');
@@ -96,7 +110,7 @@ module.exports = {
 ```
 
 
-2. Implement db connection in file *server.js*
+3. Implement db connection in file *server.js*
 
 ```
 /* instantiate collection models */
@@ -133,10 +147,17 @@ localMongooseDB.once('open', async () => {
 })
 ```
 
-3. Setup Test Driven Development in VSCode by creating file *request.rest*
+At the start of server.js, two collections will be populated to batabase named 'pagination'.  You can views them with *MongoDB Compass*.
+
+![pagination data](./public/MongoDB_Compass.PNG)
+
+
+
+
+
+4. Setup Test Driven Development in VSCode by creating file *request.rest*
 This file makes use of REST Client extension and will grow with new test cases as you code along.  Here is a sample:
 
-<br>  
 
 ```
 @baseUrl = http://localhost:1975
@@ -169,23 +190,6 @@ GET {{baseUrl}}/users?page=8&limit=1&order=desc HTTP/1.1
 ```
 
 <br>  
-
-4. <strong>A small crossroad:</strong>  Choosing between local MongoDB or cloud hosted MongoAtlas
-
--  By setting up a local mongodb server, you can be free of space/transaction limitation
-    * Create an account with MongoAtlas
-    * Copy the URI token into *.env* file
-
--  Or, by using the hosted MongoAtlas, you are constrained by the limit of one cluster by which storage and transactions are monitored.  Additional charges incurred once you surpassed the upper limits.
-
-Alas, we are setting up a local db using the [MongoDB Community Server](https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-5.0.9-signed.msi) for windows.
-
-Either option above should provide you with the local agent *MongoDB Compass* which displays connection and collections (ie. tables).
-
-At the start of server.js, two collections will be populated to batabase named 'pagination'.  You can views them with *MongoDB Compass*.
-
-![pagination data](./public/MongoDB_Compass.PNG)
-
 
 
 ### Programming the pagination middleware
