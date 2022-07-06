@@ -102,6 +102,8 @@ function paginatedArrayOfObjects(model) {
         const endIndex = page * limit;
 
         const retObj = {}
+
+        // determine the next page given the resulting page number
         try {
             if (endIndex < await model.countDocuments().exec()) {
                 retObj.next = {
@@ -115,6 +117,7 @@ function paginatedArrayOfObjects(model) {
             console.log(err);
         }
 
+        // determine the previous page given the resulting page number
         if (startIndex > 0) {
             retObj.previous = {
                 page: page - 1,
