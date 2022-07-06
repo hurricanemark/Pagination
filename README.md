@@ -25,6 +25,25 @@ We can also include processing statistics such as average, total records, etc., 
 
 3. Create file *.env* and specify environment variables that can not be exposed at runtime.  e.g. PORT, NODE_ENV, SECRET, etc.
 
+* Generate random bytes string for use as SECRET
+
+```
+PS D:\DEVEL\NODEJS\> node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+d7fce4f57c65b2d7617f9ed4600d4f8f4bce7bddc954a73330560a1d8bf32a93
+```
+
+<br>   
+
+* Sample content of .env file.  If you elect to use MongoAtlas, then MONGO_URI should be defined in .env 
+
+```
+PORT=1975
+NODE_ENV=development
+SECRET=d7fce4f57c65b2d7617f9ed4600d4f8f4bce7bddc954a73330560a1d8bf32a93
+```
+
+<br>   
+
 4.  Create file *server.js* and put up the minimum neccessary server code.
 
 ```
@@ -39,7 +58,7 @@ app.get('/', (req, res) => {
     res.send("Oy, what's cooking?");
 });
 
-app.listen(PORT);
+app.listen(PORT, () => {console.log("Listening on port %d...", PORT)});
 ```
 
 5. Test that node project is ready for development.
@@ -50,7 +69,7 @@ app.listen(PORT);
 
 <strong>Let's build the middleware!</strong>
 
-1. Create data schemas (mongoose.Schema) in file ./data.js and export the models.  We want two collections: pagination.Users and pagination.Employees.  Your code should look close to the following:
+1. Create data schemas (mongoose.Schema) in file *./data.js* and export the models.  We want two collections: pagination.Users and pagination.Employees.  Your code should look close to the following:
 
 ```
 const mongoose = require('mongoose');
@@ -100,13 +119,22 @@ localMongooseDB.once('open', async () => {
         Employees.create({ name: 'Mark', age: 30, role: 'Developer', hobbies: ['Coding', 'Gaming']}),
         Employees.create({ name: 'Emily', age: 25, role: 'Designer', hobbies: ['Drawing', 'Singing']}),
         Employees.create({ name: 'Roland', age: 35, role: 'Developer', hobbies: ['Hunting', 'Fishing']}),
-        Employees.create({ name: 'Carol', age: 40, role: 'HR', hobbies: ['Reading', 'Swimming'] })
+        Employees.create({ name: 'Carol', age: 40, role: 'HR', hobbies: ['Reading', 'Swimming'] }),
+
+        Users.create({ name: 'John', email: 'john@mail.com' }),
+        Users.create({ name: 'Jane', email: 'jane@mail.com' }),
+        Users.create({ name: 'Bob', email: 'bob@mail.com' }),
+        Users.create({ name: 'Mary', email: 'mary@mail.com' }),
+        Users.create({ name: 'Tom', email: 'tom@mail.com' }),
+        Users.create({ name: 'Jack', email: 'jack@mail.com' }),
+        Users.create({ name: 'Jill', email: 'jill@mail.com' }),
+        Users.create({ name: 'Bill', email: 'bill@email.com' })
     ])
 })
 ```
 
 3. Setup Test Driven Development in VSCode by creating file *request.rest*
-This file make use of REST Client extension and will grow with new test cases as you code along.  Here is a sample:
+This file makes use of REST Client extension and will grow with new test cases as you code along.  Here is a sample:
 
 <br>  
 
@@ -142,7 +170,7 @@ GET {{baseUrl}}/users?page=8&limit=1&order=desc HTTP/1.1
 
 <br>  
 
-4. <strong>A small crossroad:  Choosing between local MongoDB or cloud hosted MongoAtlas</strong>
+4. <strong>A small crossroad:</strong>  Choosing between local MongoDB or cloud hosted MongoAtlas
 
 -  By setting up a local mongodb server, you can be free of space/transaction limitation
     * Create an account with MongoAtlas
