@@ -110,7 +110,7 @@ module.exports = {
 ```
 
 
-3. Implement db connection in file *server.js*
+3. In file *server.js*, implement db connection and populate with data for testing. 
 
 ```
 /* instantiate collection models */
