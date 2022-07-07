@@ -4,7 +4,7 @@ Given a structured data source in the form of a json array, we can write a middl
 
 We can also include processing statistics such as average, total records, etc., in the returned JSON object.  Since the paginated function is a generalized function, processing statistics will be hit and miss.  Missing elements will yield *null* which is perfectly okay.  Ah, this is encroaching upon data minning isn't it!
 
-### The Process of Up and Get Go
+### Steps to Glue it Together
 
 1. Start a nodeJS project from scratch
 
