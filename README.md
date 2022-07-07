@@ -362,3 +362,11 @@ Connection: close
   "averageAge": 53.75
 }
 ```
+
+<br>  
+
+## Conclusion
+
+Pagination is used in many popular websites to display similar data in sequential manner.  Youtube is a good example. Google search engine has numbering pages at the bottom.  Picture thumbnail is a pagination.  Carousel cards in web frame is pagination.  
+
+It no doubt enables better user experience and is one of the best navigation methods for human GUI. When you take time to step through the neccessary pieces of the purzle, your skills get stacked with another layer, the pagination layer. 
