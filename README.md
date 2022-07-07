@@ -261,6 +261,22 @@ function paginatedArrayOfObjects(model) {
 
 <br>  
 
+
+<strong>Inject the function into API methods as middleware</strong>
+
+```
+app.get('/users', paginatedArrayOfObjects(Users), (req, res) => {
+    res.json(res.paginatedResults);
+});
+
+
+app.get('/employees', paginatedArrayOfObjects(Employees), (req, res) => {
+    res.json(res.paginatedResults);
+});
+```
+
+<br>  
+
 #### Tests
 
 <strong>Query:</strong>
